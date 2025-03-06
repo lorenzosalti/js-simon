@@ -8,7 +8,7 @@ const numbersListElement = document.getElementById('numbers-list');
 const answersForm = document.getElementById('answers-form');
 const countdownElement = document.getElementById('countdown');
 let count = 3;
-const inputNumbers = document.getElementById('input-group');
+const inputNumbersGroup = document.getElementById('input-group');
 
 // creazione e visualizzazione dei numeri randomici
 for (i = 0; i < 5; i++) {
@@ -34,7 +34,9 @@ answersForm.addEventListener('submit', function (event) {
 
   event.preventDefault();
 
-  console.log(inputNumbers.innerHTML);
+  const inputNumbers = document.querySelectorAll('input.form-control');
+  const inputs = inputNumbers.value;
+  console.log(inputs);
 })
 
 

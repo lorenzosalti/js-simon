@@ -6,7 +6,8 @@ const maxNumber = 50;
 // variabili elementi html
 const numbersListElement = document.getElementById('numbers-list');
 const answersForm = document.getElementById('answers-form');
-
+const countdownElement = document.getElementById('countdown');
+let count = 10;
 
 // creazione e visualizzazione dei numeri randomici
 for (i = 0; i < 5; i++) {
@@ -19,19 +20,26 @@ for (i = 0; i < 5; i++) {
 
 console.log(randoms);
 
+// funzione asincrona a intervallo per generare countdown temporizzato
+const countdown = setInterval(function () {
+  countdownElement.innerText = count;
+  count--;
+  if (count < 0) {
+    countdownStop(countdown);
+  }
+}, 1000);
 
 
-// setTimeout(countdownStop, 10_000, 10);
 
 
 
 
-//genera un numero intero random tra min e max inclusi
+// genera un numero intero random tra min e max inclusi
 function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
+// nasconde i numeri random, mostra il form e interrompe la temporizzazione
 function countdownStop(clear) {
   numbersListElement.classList.add('d-none');
   answersForm.classList.remove('d-none');

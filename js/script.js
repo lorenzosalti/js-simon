@@ -7,7 +7,8 @@ const maxNumber = 50;
 const numbersListElement = document.getElementById('numbers-list');
 const answersForm = document.getElementById('answers-form');
 const countdownElement = document.getElementById('countdown');
-let count = 10;
+let count = 3;
+const inputNumbers = document.getElementById('input-group');
 
 // creazione e visualizzazione dei numeri randomici
 for (i = 0; i < 5; i++) {
@@ -28,6 +29,13 @@ const countdown = setInterval(function () {
     countdownStop(countdown);
   }
 }, 1000);
+
+answersForm.addEventListener('submit', function (event) {
+
+  event.preventDefault();
+
+  console.log(inputNumbers.innerHTML);
+})
 
 
 

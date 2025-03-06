@@ -33,9 +33,13 @@ const countdown = setInterval(function () {
 answersForm.addEventListener('submit', function (event) {
 
   event.preventDefault();
-
+  const inputs = [];
   const inputNumbers = document.querySelectorAll('input.form-control');
-  const inputs = inputNumbers.value;
+  // const inputs = inputNumbers.value;
+  for (let i = 0; i < inputNumbers.length; i++) {
+    const currentInput = inputNumbers[i];
+    inputs.push(currentInput.value);
+  }
   console.log(inputs);
 })
 

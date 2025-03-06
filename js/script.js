@@ -1,14 +1,19 @@
-// variabili creazione numeri
+// variabili generali
 const randoms = [];
 const minNumber = 1;
 const maxNumber = 50;
+const userInputs = [];
+const correctNumbers = [];
+let count = 30;
 
 // variabili elementi html
 const numbersListElement = document.getElementById('numbers-list');
 const answersForm = document.getElementById('answers-form');
 const countdownElement = document.getElementById('countdown');
-let count = 3;
 const inputNumbersGroup = document.getElementById('input-group');
+const inputNumbers = document.querySelectorAll('input.form-control');
+const message = document.getElementById('message');
+
 
 // creazione e visualizzazione dei numeri randomici
 for (i = 0; i < 5; i++) {
@@ -19,7 +24,7 @@ for (i = 0; i < 5; i++) {
   numbersListElement.innerHTML += `<li class="random-number">${currentNumber}</li>`;
 }
 
-console.log(randoms);
+// console.log(randoms);
 
 // funzione asincrona a intervallo per generare countdown temporizzato
 const countdown = setInterval(function () {
@@ -30,17 +35,40 @@ const countdown = setInterval(function () {
   }
 }, 1000);
 
+// evento di submit del form
 answersForm.addEventListener('submit', function (event) {
 
   event.preventDefault();
-  const inputs = [];
-  const inputNumbers = document.querySelectorAll('input.form-control');
-  // const inputs = inputNumbers.value;
+
   for (let i = 0; i < inputNumbers.length; i++) {
+
+    // inserimento degli input in un array
     const currentInput = inputNumbers[i];
-    inputs.push(currentInput.value);
+    const currentInputInt = parseInt(currentInput.value);
+    userInputs.push(currentInputInt);
+
+    // push dei numeri inseriti presenti anche in randoms
+    if (randoms.includes(currentInputInt)) {
+      correctNumbers.push(currentInputInt);
+    }
   }
-  console.log(inputs);
+
+  // cambio colore del testo in base ai numeri indovinati
+  if (correctNumbers.length > 0) {
+    message.classList.remove('text-danger');
+    message.classList.add('text-success');
+  } else {
+    message.classList.add('text-danger');
+    message.classList.remove('text-success');
+  }
+
+  // inserimento del risultato
+  message.innerText = `Hai indovinato ${correctNumbers.length} numeri! (${correctNumbers})`;
+
+  // azzeramento degli array relativi agli input utente
+  userInputs.splice(0, userInputs.length);
+  correctNumbers.splice(0, correctNumbers.length);
+
 })
 
 
